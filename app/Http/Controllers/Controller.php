@@ -9,5 +9,16 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
+    public function __construct()
+    {
+        echo \view('head');
+        echo \view('menu');
+    }
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    protected function menuView()
+    {
+        echo \view('menu');
+    }
+
 }

@@ -10,6 +10,8 @@
 | the IoC container for the system binding all of the various parts.
 |
 */
+session_start();
+use App\Providers\news\FakeNewsProvider;
 
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
@@ -40,6 +42,7 @@ $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
 );
+
 
 /*
 |--------------------------------------------------------------------------

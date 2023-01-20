@@ -1,6 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\Actions\CreateNewsController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\NewsHandlerController;
+use App\Http\Controllers\News\NewsController;
+use App\Http\Controllers\News\OneNewsController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +20,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    echo '<h4>Привет, мир. Новости будут позже</h4>';
-});
+Route::get('/', [WelcomeController::class, 'index'])->name('main');
 Route::get('about', function () {
    echo '<h4>Наша компания занимается новостями, но они будут позже, так как программа в разработке.</h4>';
-});
-Route::get('news/{number}', static function (string $number) {
-   echo "<h3>Новость под номером ${number}.</h3>";
-   echo '<div>Republican congressional candidate Joe Kent’s Election Day Twitter thread listing all the evils that his Democratic opponent Marie Gluesenkamp Perez would bring to Washington’s third District was standard fare. It prominently featured a photoshopped image of Perez driving a light-rail train surrounded by pastiched images of rioting and homelessness in neighboring Portland, Oregon—suggesting with all the subtlety of a tactical nuke that her support for a TriMet light-rail extension into Vancouver would bring Armageddon. Among the most heinous passengers on Gluesenkamp-Perez’s train from hell? “Puberty blockers and ‘trans’ surgery for minors without parental consent” and “biological men competing in girl’s sports and accessing women-only spaces.</div>”';
-
-});
+})->name('about');
+Route::get('news/categories', [NewsController::class, 'getCategories'])->name('categories');
+Route::get('news/categories/{category}', [NewsController::class, 'getCategoryNews']);
+Route::get('news', [NewsController::class, 'getFreshNews'])->name('news');
+Route::get('news/{number}', [OneNewsController::class, 'index']);
+Route::get('admin', [AdminController::class, 'index'])->name('admin');
+Route::get('admin/createNews', [NewsHandlerController::class, 'create'])->name('createNews');
+Route::get('admin/createNewsAction', CreateNewsController::class)->name('createNewsAction');
