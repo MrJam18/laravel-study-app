@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Models\News;
 
 use DateTime;
+use JetBrains\PhpStorm\Pure;
 
 class News
 {
@@ -18,7 +19,9 @@ class News
         private ?string $header = null,
         private ?string $description = null,
         ?string $creationDate = null,
-        private ?string $text = null)
+        private ?string $text = null,
+        private ?string $category = null
+    )
     {
         if($creationDate) $this->creationDate = new DateTime($creationDate);
 
@@ -71,6 +74,14 @@ class News
     }
 
     /**
+     * @param string|null $category
+     */
+    public function setCategory(?string $category): void
+    {
+        $this->category = $category;
+    }
+
+    /**
      * @return string
      */
     public function getCreationDate(): string
@@ -104,6 +115,18 @@ class News
     public function getText(): ?string
     {
         return $this->text;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+    #[Pure] public function getPath(): string
+    {
+        return \route('news') . '/' . $this->getId();
     }
 
 }

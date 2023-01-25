@@ -3,37 +3,22 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Lists\NewsLists\AllNewsList;
-use App\Providers\news\FakeNewsProvider;
+use App\Http\Controllers\AbstractControllers\AdminsController;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class NewsHandlerController extends Controller
+class NewsHandlerController extends AdminsController
 {
-    private AllNewsList $list;
-
     public function __construct()
     {
         parent::__construct();
-        $provider = new FakeNewsProvider();
-        $this->list = $provider->getList();
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-//    public function index(): View
-//    {
-//        return \view('admin.index');
-//    }
 
     public function create(): View
     {
         $categoriesNames = $this->list->getCategoriesNames();
-        return \view('admin.news.createNews', ['categoriesNames' => $categoriesNames]);
+        $this->view->addCss('admin/create-news');
+        return $this->view->render('admin.news.createNews', 'создание новости', ['categoriesNames' => $categoriesNames]);
     }
 
     /**

@@ -24,10 +24,15 @@ Route::get('/', [WelcomeController::class, 'index'])->name('main');
 Route::get('about', function () {
    echo '<h4>Наша компания занимается новостями, но они будут позже, так как программа в разработке.</h4>';
 })->name('about');
-Route::get('news/categories', [NewsController::class, 'getCategories'])->name('categories');
-Route::get('news/categories/{category}', [NewsController::class, 'getCategoryNews']);
+Route::get('categories/{category}', [NewsController::class, 'getCategoryNews']);
 Route::get('news', [NewsController::class, 'getFreshNews'])->name('news');
 Route::get('news/{number}', [OneNewsController::class, 'index']);
-Route::get('admin', [AdminController::class, 'index'])->name('admin');
-Route::get('admin/createNews', [NewsHandlerController::class, 'create'])->name('createNews');
-Route::get('admin/createNewsAction', CreateNewsController::class)->name('createNewsAction');
+Route::prefix('admin')->name('admin/')->group(function (){
+   Route::get('', [AdminController::class, 'index'])->name('index');
+   Route::get('createNews', [NewsHandlerController::class, 'create'])->name('createNews');
+   Route::get('createNewsAction', CreateNewsController::class)->name('createNewsAction');
+   Route::get('deleteNews', [AdminController::class, 'inDev'])->name('deleteNews');
+   Route::get('changeNews', [AdminController::class, 'inDev'])->name('changeNews');
+   Route::get('other1', [AdminController::class, 'inDev'])->name('other1');
+   Route::get('other2', [AdminController::class, 'inDev'])->name('other2');
+});

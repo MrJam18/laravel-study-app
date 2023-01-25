@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Controllers\AbstractControllers\UsersController;
 use Illuminate\View\View;
 
-class WelcomeController extends Controller
+class WelcomeController extends UsersController
 {
-    function index(string $name = 'Пользователь'): View
+    function index(): View
     {
-        return view('welcome', ['name'=> $name]);
+        $list = [];
+        foreach ($this->list->get() as $item)
+            {
+               $list[] = $item->getOneFreshestNews();
+            }
+        $first = array_shift($list);
+        $this->view->addCss('welcome');
+        return $this->view->render('welcome', 'Главная',
+            ['list' => $list, 'first' => $first]);
     }
 }

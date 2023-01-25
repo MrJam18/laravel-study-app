@@ -5,11 +5,16 @@ namespace App\Lists\NewsLists;
 
 use App\Models\News\News;
 
+
 class NewsList
 {
+    /**
+     * @var News[]
+     */
     private array $list = [];
-    public function __construct(private string $name,
-                                private string $engName)
+    public function __construct(private string $category,
+                                private string $name,
+                                private string $description)
     {
 
     }
@@ -17,6 +22,24 @@ class NewsList
     function get(): array
     {
         return $this->list;
+    }
+
+    /**
+     * @param News[] $list
+     * @return void
+     */
+    function set(array &$list):void
+    {
+        $this->list = &$list;
+        $this->sortListByDate();
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
     function deleteNews(int $id): ?News
     {
@@ -30,13 +53,13 @@ class NewsList
         }
         return $news;
     }
+    function getCategoryName(): string
+    {
+        return $this->category;
+    }
     function getName(): string
     {
         return $this->name;
-    }
-    function getEngName(): string
-    {
-        return $this->engName;
     }
     function findById(int $id): ?News
     {
@@ -51,10 +74,32 @@ class NewsList
     function addNews(News $news): void
     {
         $this->list[] = $news;
+        $this->sortListByDate();
     }
     function getLastId(): int
     {
         $count = count($this->list);
         return $this->list[$count - 1]->getId();
+    }
+    function getOneFreshestNews(): ?News
+    {
+        $news = null;
+        if(isset($this->list[0])) $news = $this->list[0];
+        return $news;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+    private function sortListByDate(): void
+    {
+        usort($this->list, function (News $a, News $b) {
+            if ($a->getCreationDateUnformatted() > $b->getCreationDateUnformatted()) return -1;
+            else return 1;
+        });
     }
 }
