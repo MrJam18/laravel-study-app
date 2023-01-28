@@ -4,14 +4,15 @@ declare(strict_types=1);
 namespace App\Http\Controllers\AbstractControllers;
 
 use App\Http\Controllers\Controller;
+use App\Providers\news\FakeNewsProvider;
 use App\Views\Layouts\AdminsLayoutView;
 
-class AdminsController extends Controller
+abstract class AdminsController extends Controller
 {
-    public function __construct()
+    public function __construct(FakeNewsProvider $provider, AdminsLayoutView $view)
     {
-        parent::__construct();
-        $this->view = new AdminsLayoutView();
+        parent::__construct($provider);
+        $this->view = $view;
     }
 
 }

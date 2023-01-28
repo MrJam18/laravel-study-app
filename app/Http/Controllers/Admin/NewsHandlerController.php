@@ -9,10 +9,6 @@ use Illuminate\View\View;
 
 class NewsHandlerController extends AdminsController
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     public function create(): View
     {

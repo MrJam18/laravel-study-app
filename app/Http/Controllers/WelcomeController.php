@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\AbstractControllers\UsersController;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class WelcomeController extends UsersController
 {
-    function index(): View
+    function index(Request $request): View
     {
         $list = [];
         foreach ($this->list->get() as $item)
@@ -17,6 +18,6 @@ class WelcomeController extends UsersController
         $first = array_shift($list);
         $this->view->addCss('welcome');
         return $this->view->render('welcome', 'Главная',
-            ['list' => $list, 'first' => $first]);
+            ['list' => $list, 'first' => $first, 'alert' => $request->query('alert')]);
     }
 }

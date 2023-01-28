@@ -16,9 +16,8 @@ class Controller extends BaseController
     protected LayoutsInterface $view;
     protected AllNewsList $list;
 
-    public function __construct()
+    public function __construct(FakeNewsProvider $provider)
     {
-        $provider = new FakeNewsProvider();
         $this->list = $provider->getList();
     }
 

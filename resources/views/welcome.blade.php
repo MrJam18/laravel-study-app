@@ -1,4 +1,7 @@
 <main class="container">
+    @if($alert)
+        <x-alert type="success" :text="$alert"></x-alert>
+    @endif
     <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
         <div class="col-md-6 px-0 first-news">
             <h1 class="display-4 fst-italic">{{$first->getHeader()}}</h1>

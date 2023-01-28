@@ -1,8 +1,9 @@
 <div class="create-news__main">
     <div class="create-news__content">
         <h3 class="header">Создание новости</h3>
-        <form action='{{\route('admin/createNewsAction')}}' class="form-group create-news__form">
+        <form method="post" action='{{\route('api/createNews')}}' class="form-group create-news__form">
             <div >
+                @csrf
                 <label for="createNews__category" class="create-news__label">Категория</label>
                 <select id="createNews__category" name="category" class="form-control create-news__input" >
                     @foreach ($categoriesNames as $engName => $name)
@@ -10,7 +11,7 @@
                     @endforeach
                 </select>
                 <label class="create-news__label" for="createNews__header">Заголовок</label>
-                <input type="text" class="form-control create-news__input" name="header" id="createNews__header">
+                <input required type="text" class="form-control create-news__input" name="header" id="createNews__header">
                 <label class="create-news__label" for="createNews__description">Краткое описание</label>
                 <textarea class="form-control create-news__input" id="createNews__description" required rows="4" name="description"></textarea>
                 <label class="create-news__label" for="createNews__text">Текст статьи</label>

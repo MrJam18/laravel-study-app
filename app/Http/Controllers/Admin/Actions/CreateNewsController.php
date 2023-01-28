@@ -16,11 +16,11 @@ class CreateNewsController extends AdminsController
     public function __invoke(Request $request): View
     {
         try{
-            $query = $request->query();
+            $data = $request->all();
             $id = $this->list->getLastId() + 1;
             $creationDate = (new DateTime())->format('y-m-d');
-            $news = new News($id, $query['header'], $query['description'],$creationDate, $query['text']);
-            $this->list->addNews($query['category'], $news);
+            $news = new News($id, $data['header'], $data['description'],$creationDate, $data['text']);
+            $this->list->addNews($data['category'], $news);
             return $this->view->render('admin.news.success', 'Успешно');
         }
         catch (NotFoundListException $exception) {

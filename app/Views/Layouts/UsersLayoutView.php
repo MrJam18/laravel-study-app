@@ -27,6 +27,7 @@ class UsersLayoutView implements LayoutsInterface
         $menuRoutes->addRoute(new MenuRoute('main', 'Главная'));
         $menuRoutes->addRoute(new MenuRoute('news', 'Новости'));
         $menuRoutes->addRoute(new MenuRoute('admin/index', 'Панель администратора'));
+        $menuRoutes->addRoute(new MenuRoute('about/index', 'О нас'));
         $menuRoutes->setCurrentRoute();
         $viewVars = [
             'categories' => $this->categories,

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Providers\news;
 
-use App\Exceptions\NotFoundListException;
 use App\Lists\NewsLists\AllNewsList;
 use App\Models\News\News;
 

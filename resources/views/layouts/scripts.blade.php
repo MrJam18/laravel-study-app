@@ -11,3 +11,4 @@
         text: 'Thumbnail'
     });
 </script>
+@stack('js')
