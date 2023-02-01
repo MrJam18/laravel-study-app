@@ -4,15 +4,15 @@ declare(strict_types=1);
 namespace App\Http\Controllers\AbstractControllers;
 
 use App\Http\Controllers\Controller;
-use App\Providers\news\FakeNewsProvider;
 use App\Views\Layouts\UsersLayoutView;
+use Illuminate\Support\Facades\DB;
 
 abstract class UsersController extends Controller
 {
-    public function __construct(FakeNewsProvider $provider)
+    public function __construct()
     {
-        parent::__construct($provider);
-        $this->view = new UsersLayoutView($this->list->getCategoriesNames());
+        $categories = DB::table('categories')->get(['name', 'title']);
+        $this->view = new UsersLayoutView($categories);
     }
 
 

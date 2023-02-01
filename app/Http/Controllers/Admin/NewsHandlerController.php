@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AbstractControllers\AdminsController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class NewsHandlerController extends AdminsController
@@ -12,9 +13,10 @@ class NewsHandlerController extends AdminsController
 
     public function create(): View
     {
-        $categoriesNames = $this->list->getCategoriesNames();
+        $categories = DB::table('categories')->get(['id', 'title']);
+        $newsSources = DB::table('news_sources')->get(['id', 'name']);
         $this->view->addCss('admin/create-news');
-        return $this->view->render('admin.news.createNews', 'создание новости', ['categoriesNames' => $categoriesNames]);
+        return $this->view->render('admin.news.createNews', 'создание новости', ['categories' => $categories, 'newsSources' => $newsSources]);
     }
 
     /**

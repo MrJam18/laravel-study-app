@@ -7,6 +7,7 @@ use App\Http\Routes\Menu\MenuRoute;
 use App\Http\Routes\Menu\RouteList;
 use App\Http\Routes\Menu\UsersMenuRouteList;
 use App\Views\Interfaces\LayoutsInterface;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
@@ -14,7 +15,7 @@ class UsersLayoutView implements LayoutsInterface
 {
     private array $cssLinks;
 
-    public function __construct(private array $categories)
+    public function __construct(private Collection $categories)
     {
         $this->cssLinks = [];
         $this->addCss('layouts/users');

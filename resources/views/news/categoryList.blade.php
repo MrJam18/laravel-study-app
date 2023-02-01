@@ -1,4 +1,4 @@
 <div class="category-list__main container">
-    <x-news.news-header :title="$list->getCategoryName()" :description="$list->getDescription()"></x-news.news-header>
-    <x-news.news-category-list :hideCategory="true" :list="$list->get()"></x-news.news-category-list>
+    <x-news.news-header :title="$category->title" :description="$category->description"></x-news.news-header>
+    <x-news.news-category-list :list="$list"></x-news.news-category-list>
 </div>
