@@ -1,6 +1,11 @@
 @extends('layouts.admins.layout')
 @section('content')
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="main">
+    @if(session('alertType'))
+        <div class="alert-container">
+            <x-alert :type="\session('alertType')" :message="\session('alertMessage')"></x-alert>
+        </div>
+    @endif
             @include($viewPath, $data)
-        </main>
+    </div>
 @endsection

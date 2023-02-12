@@ -1,0 +1,19 @@
+.admin-list__main {
+    width: 100%;
+    position: relative;
+}
+.admin-list__toolbar {
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.admin-list__delete-button {
+    color: red;
+}
+.admin-list__create-button {
+    padding: 0;
+}
+.admin-list__create-link {
+    padding: 25px 13px;
+}
+

@@ -21,4 +21,12 @@ body {
 .blog-footer p:last-child {
     margin-bottom: 0;
 }
+.header {
+    margin: 0 auto;
+    text-align: center;
+}
+.antilink {
+    color: unset;
+    text-decoration: unset;
+}
 

@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace App\Http\Controllers\AbstractControllers;
 
 use App\Http\Controllers\Controller;
-use App\Views\Layouts\UsersLayoutView;
-use Illuminate\Support\Facades\DB;
+use App\QueryBuilders\CategoriesQueryBuilder;
+use App\View\Layouts\UsersLayoutView;
 
 abstract class UsersController extends Controller
 {
-    public function __construct()
+    public function __construct(CategoriesQueryBuilder $builder)
     {
-        $categories = DB::table('categories')->get(['name', 'title']);
+        $categories = $builder->getColumns(['title', 'name']);
         $this->view = new UsersLayoutView($categories);
     }
 

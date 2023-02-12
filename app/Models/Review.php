@@ -1,61 +1,28 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 namespace App\Models;
 
-class Review
+use App\Models\Traits\RusTimeStamps;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @property int $id;
+ * @property string $username;
+ * @property string $text;
+ * @property string $description;
+ * @property string $created_at;
+ * @property string $updated_at;
+ */
+class Review extends Model
 {
-    public function __construct(private int $id,
-                                private ?string $name = null,
-                                private ?string $text = null)
-    {
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @param string|null $name
-     */
-    public function setName(?string $name): void
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @param string|null $text
-     */
-    public function setText(?string $text): void
-    {
-        $this->text = $text;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getText(): ?string
-    {
-        return $this->text;
-    }
+    use HasFactory, RusTimeStamps;
+    public $timestamps = true;
+    protected $fillable = [
+      'id',
+      'username',
+      'text',
+      'description',
+    ];
 }

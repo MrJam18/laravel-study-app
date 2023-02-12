@@ -8,3 +8,7 @@
     border: 0;
     background-color: transparent;
 }
+.alert {
+    padding: 10px 20px;
+}
+

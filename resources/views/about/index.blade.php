@@ -10,7 +10,7 @@
         <h3>Формы обратной связи</h3>
         <ul>
             <li><a href="{{\route('about/review')}}">Отзыв о нас</a></li>
-            <li><a href="{{\route('about/dataExport')}}">Запрос на выгрузку данных</a></li>
+            <li><a href="{{\route('about/newsSourceRequest')}}">Запрос на выгрузку данных</a></li>
         </ul>
     </div>
 </main>

@@ -5,35 +5,30 @@ namespace App\Http\Controllers\News;
 
 use App\Exceptions\PageNotFoundException;
 use App\Http\Controllers\AbstractControllers\UsersController;
-use Illuminate\Support\Facades\DB;
+use App\Models\News\Category;
+use App\QueryBuilders\NewsQueryBuilder;
 use Illuminate\View\View;
 
 class NewsController extends UsersController
 {
 
-    function getFreshNews(): View
+    function getFreshNews(NewsQueryBuilder $builder): View
     {
         $description = \fake()->text();
-        $list = DB::table('news')
-            ->join('categories', 'news.category_id', '=', 'categories.id')
-            ->orderBy('news.created_at', 'desc')
-            ->get(['news.id', DB::raw("date_format(news.created_at, '%d.%m.%Y') as created_at") , 'news.title', 'news.description', 'categories.title as category']);
+        $list = $builder->getAll();
         return $this->view->render('news.freshNews', 'Новости', ['list' => $list, 'description' => $description]);
     }
-    function getCategoryNews(string $category): View
+    function getCategoryNews(string $category, NewsQueryBuilder $builder): View
     {
         try {
-            $DBCategory = DB::table('categories')
-                ->where('name', $category)
-                ->first(['title', 'description', 'id']);
-            $list = DB::table('news')
-                ->orderBy('news.created_at', 'desc')
-                ->get(['news.id', DB::raw("date_format(news.created_at, '%d.%m.%Y') as created_at") , 'news.title', 'news.text']);
+            $category = Category::query()->where('name', $category)->first(['id', 'description', 'title']);
+            if(!$category) throw new PageNotFoundException();
+            $list = $builder->getListByCategory($category->id);
             $this->view->addCss('news/categories');
-            return $this->view->render('news.categoryList', $category, ['list'=>$list, 'category' => $DBCategory]);
+            return $this->view->render('news.categoryList', $category->title, ['list'=>$list, 'category' => $category]);
         }
         catch (PageNotFoundException $exception) {
-            return $this->view->render('404', '404');
+            return $this->view->render('404', 'Страница не найдена');
         }
     }
 }

@@ -1,132 +1,42 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 namespace App\Models\News;
 
-use DateTime;
-use JetBrains\PhpStorm\Pure;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class News
+/**
+ * @property int|string $id
+ * @property string $title
+ * @property string $description
+ * @property string $created_at
+ * @property string $text
+ * @property int $category_id
+ * @property Category $category
+ * @property int $news_source_id
+ * @property NewsSource $news_source
+ */
+class News extends Model
 {
-
-    private DateTime $creationDate;
-
-    /**
-     * @throws \Exception
-     */
-    function __construct(
-        private int $id,
-        private ?string $header = null,
-        private ?string $description = null,
-        ?string $creationDate = null,
-        private ?string $text = null,
-        private ?string $category = null
-    )
+    use HasFactory;
+    protected $fillable = [
+        'id',
+        'title',
+        'description',
+        'text',
+        'created_at',
+        'category_id',
+        'news_source_id'
+    ];
+    public $timestamps = false;
+    public function category(): BelongsTo
     {
-        if($creationDate) $this->creationDate = new DateTime($creationDate);
-
+        return $this->belongsTo(Category::class);
     }
-
-    function setId(int $id)
+    public function newsSource(): BelongsTo
     {
-      $this->id = $id;
+        return $this->belongsTo(NewsSource::class);
     }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param string $creationDate
-     * @throws \Exception
-     */
-    public function setCreationDate(string $creationDate): void
-    {
-        $this->creationDate = new DateTime($creationDate);
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @param string $header
-     */
-    public function setHeader(string $header): void
-    {
-        $this->header = $header;
-    }
-
-    /**
-     * @param string|null $text
-     */
-    public function setText(?string $text): void
-    {
-        $this->text = $text;
-    }
-
-    /**
-     * @param string|null $category
-     */
-    public function setCategory(?string $category): void
-    {
-        $this->category = $category;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCreationDate(): string
-    {
-        return $this->creationDate->format('d.m.Y');
-    }
-    public function getCreationDateUnformatted(): DateTime
-    {
-        return $this->creationDate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHeader(): string
-    {
-        return $this->header;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getText(): ?string
-    {
-        return $this->text;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-    #[Pure] public function getPath(): string
-    {
-        return \route('news') . '/' . $this->getId();
-    }
-
 }

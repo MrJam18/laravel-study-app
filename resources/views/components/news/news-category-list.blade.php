@@ -9,7 +9,7 @@
                     <div class="col p-4 d-flex flex-column position-static news-list__news-container">
                         <h3 class="mb-0 news-list__header news-list__header_full">{{$item->title}}</h3>
                         <p class="card-text mb-auto news-list__text_category">{{$item->text}}</p>
-                        <div class="mb-1 text-muted">{{$item->created_at}}</div>
+                        <div class="mb-1 text-muted">{{$item->created_at}} г.</div>
                         <a href="{{\route('news') . '/' . $item->id}}" class="stretched-link">Читать</a>
                     </div>
                 </div>

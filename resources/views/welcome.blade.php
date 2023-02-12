@@ -1,6 +1,6 @@
 <main class="container">
-    @if($alert)
-        <x-alert type="success" :text="$alert"></x-alert>
+    @if(\session('alertType'))
+        <x-alert :type="\session('alertType')" :message="\session('alertMessage')"></x-alert>
     @endif
     <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
         <div class="col-md-6 px-0 first-news">
