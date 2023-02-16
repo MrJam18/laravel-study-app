@@ -1,4 +1,12 @@
-<select {{\ifSet($required, 'required')}} {{\ifSet($id, "id=$id")}}  {{\ifSet($name, "name=$name")}} {!!\ifSet($class, "class='$class'")!!}>
+
+@php
+if(\getIfSet($errorHas)) {
+    if(isset($class)) $class = $class . ' is-invalid';
+    else $class = 'is-invalid';
+}
+else $class = \getIfSet($class);
+@endphp
+<select {{\ifSet($required, 'required')}} {{\ifSet($id, "id=$id")}}  {{\ifSet($name, "name=$name")}} class="{!!$class!!}">
     {{$valueSetted = isset($value)}}
     <option value="" {{!$valueSetted ? 'selected' : null}} disabled>--Выбрать--</option>
     @foreach($list as $item)

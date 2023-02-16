@@ -26,7 +26,7 @@
                 @endphp
                 <td>{{$value}}</td>
             @endforeach
-            <td><a class="admin-list__delete-button" href="{{\route($vars->routes . 'actions/delete', [$item->id])}}">Удалить</a>/<a href="{{\route( $vars->routes . 'change', [$item->id])}}">Изменить</a> </td>
+            <td><button data-id="{{$item->id}}" type="button" id="confirming-button" class="admin-list__delete-button antibutton" data-bs-toggle="modal" data-bs-target="#exampleModal">Удалить</button>/<a href="{{\route( $vars->routes . 'change', [$item->id])}}">Изменить</a> </td>
         </tr>
     @endforeach
     </tbody>
@@ -34,3 +34,5 @@
 <div class="admin-container">
     {{$vars->list->links()}}
 </div>
+<div class="invisible" id="delete-route">{{\url($vars->routes . 'actions/delete')}}</div>
+<x-confirm />

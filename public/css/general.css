@@ -4,9 +4,11 @@ body {
     display: flex;
     flex-direction: column;
 }
+ul {
+    margin: 0;
+}
 .error {
-    color: red;
-    text-align: center;
+    margin-top: 10px;
 }
 /*
  * Footer
@@ -28,5 +30,14 @@ body {
 .antilink {
     color: unset;
     text-decoration: unset;
+}
+.antibutton {
+    border: none;
+    background-color: unset;
+    margin: 0;
+    padding: 0;
+}
+.invisible {
+    display: none;
 }
 

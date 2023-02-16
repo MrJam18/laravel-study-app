@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\NewsSourcesRequests;
 
 use App\Exceptions\DBRecordNotFoundException;
 use App\Http\Controllers\AbstractControllers\ActionController;
+use App\Http\Requests\Admin\Setters\NewsSourcesRequestsRequest;
 use App\Models\NewsSourceRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ use Illuminate\Http\Request;
 class NewsSourcesRequestsActionsController extends ActionController
 {
     private string $listRoute = 'admin/newsSourcesRequests/list';
-    public function create(Request $request): RedirectResponse
+    public function create(NewsSourcesRequestsRequest $request): RedirectResponse
     {
         try{
             $data = $request->except(['_token']);
@@ -34,7 +35,7 @@ class NewsSourcesRequestsActionsController extends ActionController
             return $this->backWithError($e, $request);
         }
     }
-    public function edit(NewsSourceRequest $sourceRequest, Request $request): RedirectResponse
+    public function edit(NewsSourceRequest $sourceRequest, NewsSourcesRequestsRequest $request): RedirectResponse
     {
         try{
             $data = $request->except(['_token']);

@@ -4,15 +4,15 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin\Reviews;
 
 use App\Http\Controllers\AbstractControllers\ActionController;
+use App\Http\Requests\Admin\Setters\ReviewsSetterRequest;
 use App\Models\Review;
 use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class ReviewsActionsController extends ActionController
 {
     private string $listRoute = 'admin/reviews/list';
-    function create(Request $request): RedirectResponse
+    function create(ReviewsSetterRequest $request): RedirectResponse
     {
         try{
             $data = $request->except('__token');
@@ -33,7 +33,7 @@ class ReviewsActionsController extends ActionController
             return $this->redirectWithAlert($this->listRoute, 'Ошибка: ' . $exception->getMessage(), 'danger');
         }
     }
-    function edit(Review $review, Request $request): RedirectResponse
+    function edit(Review $review, ReviewsSetterRequest $request): RedirectResponse
     {
         try {
             $data = $this->getAllFromRequest($request);

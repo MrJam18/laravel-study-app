@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Admin\Categories;
 
 use App\Exceptions\DBRecordNotFoundException;
 use App\Http\Controllers\AbstractControllers\ActionController;
+use App\Http\Requests\Admin\Setters\CategoriesSetterRequest;
 use App\Models\News\Category;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class CategoriesActionsController extends ActionController
 {
     private string $listRoute = 'admin/categories/list';
-       public function create(Request $request): RedirectResponse
+       public function create(CategoriesSetterRequest $request): RedirectResponse
     {
         try{
-            $data = $request->except(['__token']);
+            $data = $request->validated();
             $category = new Category($data);
             $category->save();
             return $this->redirectWithAlert('admin/categories/list', 'Категория успешно создана');
@@ -25,11 +25,11 @@ class CategoriesActionsController extends ActionController
         }
     }
 
-    public function edit(Category $category, Request $request): RedirectResponse
+    public function edit(Category $category, CategoriesSetterRequest $request): RedirectResponse
     {
         try {
-            if(!$category->id) throw new \Exception('Категория не найдена.');
-            $data = $request->except('__token');
+            if(!$category->exists) throw new DBRecordNotFoundException('Категория не найдена.');
+            $data = $request->validated();
             $category->update($data);
             return $this->redirectWithAlert('admin/categories/list', 'Категория успешно изменена');
         }

@@ -5,15 +5,15 @@ namespace App\Http\Controllers\Admin\News;
 
 use App\Exceptions\DBRecordNotFoundException;
 use App\Http\Controllers\AbstractControllers\ActionController;
+use App\Http\Requests\Admin\Setters\NewsSetterRequest;
 use App\Models\News\News;
-use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class NewsActionsController extends ActionController
 {
     private string $listRoute = 'admin/news/list';
-    public function create(Request $request): RedirectResponse
+    public function create(NewsSetterRequest $request): RedirectResponse
     {
         try{
             $newsData = $request->except(['_token']);
@@ -36,7 +36,7 @@ class NewsActionsController extends ActionController
             return $this->redirectWithError($this->listRoute, $e);
         }
     }
-    public function edit(News $news, Request $request): RedirectResponse
+    public function edit(News $news, NewsSetterRequest $request): RedirectResponse
     {
         try{
             $newsData = $request->except(['_token']);

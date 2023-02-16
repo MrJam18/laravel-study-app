@@ -19,7 +19,7 @@ Route::prefix('news')->name('news/')->group(function ()
     Route::get('create', [NewsController::class, 'create'])->name('create');
     Route::get('change/{news}', [NewsController::class, 'change'])->name('change');
     Route::prefix('actions')->name('actions/')->group(function () {
-        Route::get('delete/{news}', [NewsActionsController::class, 'destroy'])->name('delete');
+        Route::delete('delete/{news}', [NewsActionsController::class, 'destroy'])->name('delete');
         Route::post('change/{news}', [NewsActionsController::class, 'edit'])->name('change');
         Route::post('create', [NewsActionsController::class, 'create'])->name('create');
     });
@@ -29,7 +29,7 @@ Route::prefix('news')->name('news/')->group(function ()
     Route::get('create', [CategoriesController::class, 'create'])->name('create');
     Route::get('change/{category}', [CategoriesController::class, 'change'])->name('change');
     \routeGroup('actions', function () {
-        Route::get('delete/{category}', [CategoriesActionsController::class, 'destroy'])->name('delete');
+        Route::delete('delete/{category}', [CategoriesActionsController::class, 'destroy'])->name('delete');
         Route::post('create', [CategoriesActionsController::class, 'create'])->name('create');
         Route::post('change/{category}', [CategoriesActionsController::class, 'edit'])->name('change');
     });
@@ -39,7 +39,7 @@ Route::prefix('news')->name('news/')->group(function ()
     Route::get('create', [ReviewsController::class, 'create'])->name('create');
     Route::get('change/{review}', [ReviewsController::class, 'change'])->name('change');
     \routeGroup('actions', function () {
-        Route::get('delete/{review}', [ReviewsActionsController::class, 'destroy'])->name('delete');
+        Route::delete('delete/{review}', [ReviewsActionsController::class, 'destroy'])->name('delete');
         Route::post('create', [ReviewsActionsController::class, 'create'])->name('create');
         Route::post('change/{review}', [ReviewsActionsController::class, 'edit'])->name('change');
     });
@@ -49,7 +49,7 @@ Route::prefix('news')->name('news/')->group(function ()
     Route::get('create', [NewsSourcesRequestsController::class, 'create'])->name('create');
     Route::get('change/{sourceRequest}', [NewsSourcesRequestsController::class, 'change'])->name('change');
     \routeGroup('actions', function () {
-        Route::get('delete/{sourceRequest}', [NewsSourcesRequestsActionsController::class, 'destroy'])->name('delete');
+        Route::delete('delete/{sourceRequest}', [NewsSourcesRequestsActionsController::class, 'destroy'])->name('delete');
         Route::post('create', [NewsSourcesRequestsActionsController::class, 'create'])->name('create');
         Route::post('change/{sourceRequest}', [NewsSourcesRequestsActionsController::class, 'edit'])->name('change');
     });

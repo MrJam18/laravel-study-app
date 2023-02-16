@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('news_sources_requests', function (Blueprint $table) {
-            $table->string('description', 1000)->nullable();
+        Schema::table('reviews', function (Blueprint $table) {
+            $table->dropColumn('description');
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('news_sources_requests', function (Blueprint $table) {
-            $table->dropColumn('description');
+        Schema::table('reviews', function (Blueprint $table) {
+            $table->string('description', 1000);
         });
     }
 };

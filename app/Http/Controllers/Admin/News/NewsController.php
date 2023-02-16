@@ -14,6 +14,7 @@ use App\View\ViewVars\AdminSetterViewVars;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use JetBrains\PhpStorm\ArrayShape;
+use stdClass;
 
 class NewsController extends AdminListController
 {
@@ -23,6 +24,7 @@ class NewsController extends AdminListController
     {
         $viewVars->header = 'Создание новости';
         $viewVars->data = $this->getNewsSetterData();
+
         $viewVars->model = new News($request->old());
         $viewVars->actionRoute = \route('admin/news/actions/create');
         return $this->renderSetter($this->setterPath, $viewVars);
