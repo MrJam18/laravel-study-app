@@ -10,6 +10,9 @@ use App\Http\Controllers\Admin\NewsSourcesRequests\NewsSourcesRequestsController
 use App\Http\Controllers\Admin\NewsSourcesRequests\NewsSourcesRequestsActionsController;
 use App\Http\Controllers\Admin\Reviews\ReviewsActionsController;
 use App\Http\Controllers\Admin\Reviews\ReviewsController;
+use App\Http\Controllers\Admin\Users\UsersActionsController;
+use App\Http\Controllers\Admin\Users\UsersController;
+use App\Http\Controllers\Auth\AdminResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('', [MainController::class, 'index'])->name('index');
@@ -18,41 +21,32 @@ Route::prefix('news')->name('news/')->group(function ()
     Route::get('list', [NewsController::class, 'getList' ])->name('list');
     Route::get('create', [NewsController::class, 'create'])->name('create');
     Route::get('change/{news}', [NewsController::class, 'change'])->name('change');
-    Route::prefix('actions')->name('actions/')->group(function () {
-        Route::delete('delete/{news}', [NewsActionsController::class, 'destroy'])->name('delete');
-        Route::post('change/{news}', [NewsActionsController::class, 'edit'])->name('change');
-        Route::post('create', [NewsActionsController::class, 'create'])->name('create');
-    });
+    \actionGroup(NewsActionsController::class, 'news');
 });
 \routeGroup('categories', function (){
     Route::get('list', [CategoriesController::class, 'getList'])->name('list');
     Route::get('create', [CategoriesController::class, 'create'])->name('create');
     Route::get('change/{category}', [CategoriesController::class, 'change'])->name('change');
-    \routeGroup('actions', function () {
-        Route::delete('delete/{category}', [CategoriesActionsController::class, 'destroy'])->name('delete');
-        Route::post('create', [CategoriesActionsController::class, 'create'])->name('create');
-        Route::post('change/{category}', [CategoriesActionsController::class, 'edit'])->name('change');
-    });
+    \actionGroup(CategoriesActionsController::class, 'category');
 });
 \routeGroup('reviews', function () {
     Route::get('list', [ReviewsController::class, 'getList'])->name('list');
     Route::get('create', [ReviewsController::class, 'create'])->name('create');
     Route::get('change/{review}', [ReviewsController::class, 'change'])->name('change');
-    \routeGroup('actions', function () {
-        Route::delete('delete/{review}', [ReviewsActionsController::class, 'destroy'])->name('delete');
-        Route::post('create', [ReviewsActionsController::class, 'create'])->name('create');
-        Route::post('change/{review}', [ReviewsActionsController::class, 'edit'])->name('change');
-    });
+    \actionGroup(ReviewsActionsController::class, 'review');
 });
 \routeGroup('newsSourcesRequests', function (){
     Route::get('list', [NewsSourcesRequestsController::class, 'getList'])->name('list');
     Route::get('create', [NewsSourcesRequestsController::class, 'create'])->name('create');
     Route::get('change/{sourceRequest}', [NewsSourcesRequestsController::class, 'change'])->name('change');
-    \routeGroup('actions', function () {
-        Route::delete('delete/{sourceRequest}', [NewsSourcesRequestsActionsController::class, 'destroy'])->name('delete');
-        Route::post('create', [NewsSourcesRequestsActionsController::class, 'create'])->name('create');
-        Route::post('change/{sourceRequest}', [NewsSourcesRequestsActionsController::class, 'edit'])->name('change');
-    });
+    \actionGroup(NewsSourcesRequestsActionsController::class, 'sourceRequest');
+});
+\routeGroup('users', function () {
+    Route::get('list', [UsersController::class, 'getList'])->name('list');
+    Route::get('create', [UsersController::class, 'create'])->name('create');
+    Route::get('change/{user}', [UsersController::class, 'change'])->name('change');
+    \actionGroup(UsersActionsController::class, 'user');
+    Route::post('resetPassword', [AdminResetPasswordController::class, 'resetPassword'])->name('resetPassword');
 });
 Route::prefix('other')->name('other/')->group(function ()
 {

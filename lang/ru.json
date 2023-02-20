@@ -1,0 +1,11 @@
+{
+    "Login": "Вход",
+    "Logout": "Выход",
+    "Email Address": "Электронная почта",
+    "Password": "Пароль",
+    "Remember Me": "Запомнить меня",
+    "Forgot Your Password?": "Забыли пароль?",
+    "Register": "Регистрация",
+    "Name": "Имя пользователя",
+    "A fresh verification link has been sent to your email address.": "ссылка для активации учетной записи отправлена на вашу электронную почту"
+}

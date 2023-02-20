@@ -22,7 +22,13 @@
             @foreach($vars->properties as $globalProperty)
                 @php
                     if(is_array($globalProperty)) $value = array_reduce($globalProperty, fn($value, $property) => $value->$property, $item);
-                    else $value = $item->$globalProperty;
+                    else {
+                        if(preg_match('/:fn$/', $globalProperty)) {
+                            $globalProperty = str_replace(':fn', '', $globalProperty);
+                            $value = $item->$globalProperty();
+                        }
+                        else $value = $item->$globalProperty;
+                    }
                 @endphp
                 <td>{{$value}}</td>
             @endforeach

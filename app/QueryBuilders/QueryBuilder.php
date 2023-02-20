@@ -13,6 +13,7 @@ abstract class QueryBuilder
 {
     protected string $model;
     protected OrderBy $defaultOrderBy;
+    protected string $tableName;
 
 
     function getAll(): Collection

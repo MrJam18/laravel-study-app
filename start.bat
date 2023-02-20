@@ -1,3 +1,5 @@
 sc start "MySQL80"
-php E:\projects\laravel-study-app\artisan serve
+start /b "" php E:\projects\laravel-study-app\artisan serve
+npm run dev
 sc stop "MySQL80"
+

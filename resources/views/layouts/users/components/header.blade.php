@@ -9,10 +9,35 @@
                 <li><a href='{{$route->getHref()}}' class="nav-link px-2 text-white {{$route->isCurrentRoute ? 'menu-active' : ''}}">{{$route->getTitle()}}</a></li>
                 @endforeach
             </ul>
-            <div class="text-end">
-                <button type="button" class="btn btn-outline-light me-2">Вход</button>
-                <button type="button" class="btn btn-warning">Регистрация</button>
-            </div>
+            @guest
+                <div class="text-end">
+                    <a class="btn btn-outline-light me-2" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="btn btn-warning" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </div>
+            @endguest
+            @auth
+                <li class="nav-item dropdown user-bar">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }}
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        @if(Auth::user()->is_admin)
+                            <a class="dropdown-item" href="{{ route('admin/index') }}">
+                                Админка
+                            </a>
+                        @endif
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            @endauth
         </div>
     </div>
 </header>

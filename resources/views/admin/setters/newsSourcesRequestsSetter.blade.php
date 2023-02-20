@@ -19,7 +19,4 @@
             <x-formerror/>
         </form>
     </div>
-    @if(\session('error'))
-        <div class="error admin-setter__error">{{\session('error')}}</div>
-    @endif
 </div>

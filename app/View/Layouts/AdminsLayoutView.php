@@ -12,11 +12,11 @@ class AdminsLayoutView extends LayoutView
 {
     public function __construct()
     {
-        $this->addCss('layouts/admin');
     }
 
     public function render(string $viewPath, string $title = 'Неизвестно', ?array $data = []): View
     {
+        $this->addCss('layouts/admin');
         $menuLists = $this->buildMenu();
         $viewVars = [
             'title' => $title,
@@ -36,6 +36,7 @@ class AdminsLayoutView extends LayoutView
         $otherRouteList = new AdminRouteList('Другое');
         $otherRouteList->addRoute(new MenuRoute('admin/reviews/list', 'Отзывы'));
         $otherRouteList->addRoute(new MenuRoute('admin/newsSourcesRequests/list', 'Запросы источников'));
+        $otherRouteList->addRoute(new MenuRoute('admin/users/list', 'Пользователи'));
         $lists = new AdminRouteLists();
         $lists->addList($newsRouteList);
         $lists->addList($otherRouteList);

@@ -38,4 +38,7 @@
 .admin-setter__error {
     font-size: 15px;
 }
+.admin-setter__checkbox {
+    margin-left: 10px;
+}
 

@@ -5,7 +5,9 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\News\OneNewsController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Middleware\CheckIsAdmin;
 use App\Http\Routes\RoutersHandler;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 $routers = new RoutersHandler('web');
 
@@ -20,7 +22,8 @@ $routers = new RoutersHandler('web');
 | contains the "web" middleware group. Now create something great!
 |
 */
-$routers->add('admin');
+Auth::routes();
+$routers->add('admin', CheckIsAdmin::class);
 Route::get('', [WelcomeController::class, 'index'])->name('main');
 Route::get('categories/{category}', [NewsController::class, 'getCategoryNews']);
 Route::get('news', [NewsController::class, 'getFreshNews'])->name('news');
@@ -36,3 +39,8 @@ Route::prefix('api')->name('api/')->group(function() {
    Route::post('createReview', [AboutController::class, 'createReview'])->name('createReview');
    Route::post('createDataExportRequest', [AboutController::class, 'createDataExportRequest'])->name('createDataExportRequest');
 });
+
+Route::get('dump', function(){
+   return \view('dump');
+})->name('dump');
+

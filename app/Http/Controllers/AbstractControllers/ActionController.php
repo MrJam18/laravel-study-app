@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\AbstractControllers;
 
+use App\Exceptions\DBRecordNotFoundException;
 use App\Http\Controllers\Controller;
 use Exception;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -26,5 +28,12 @@ abstract class ActionController extends Controller
     protected function getAllFromRequest(Request $request): array
     {
         return $request->except('__token');
+    }
+
+    /**
+     * @throws DBRecordNotFoundException
+     */
+    protected function checkModelExists(Model $model): void {
+        if(!$model->exists) throw new DBRecordNotFoundException('model not found');
     }
 }

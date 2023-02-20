@@ -10,6 +10,7 @@ use Illuminate\View\View;
 
 class UsersLayoutView extends LayoutView
 {
+    public bool $isAdmin;
     public function __construct(private Collection $categories)
     {
         $this->addCss('layouts/users');
@@ -21,7 +22,6 @@ class UsersLayoutView extends LayoutView
         $menuRoutes = new RouteList();
         $menuRoutes->addRoute(new MenuRoute('main', 'Главная'));
         $menuRoutes->addRoute(new MenuRoute('news', 'Новости'));
-        $menuRoutes->addRoute(new MenuRoute('admin/index', 'Панель администратора'));
         $menuRoutes->addRoute(new MenuRoute('about/index', 'О нас'));
         $menuRoutes->setCurrentRoute();
         $viewVars = [

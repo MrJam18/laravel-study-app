@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\News\NewsSource;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,10 +23,16 @@ class NewsSeeder extends Seeder
         $this->fillNews();
         DB::table('news')->insert($this->news);
     }
+    private int $firstSourceId;
+    private int $lastSourceId;
+
 
     private function fillNews(): void
     {
         $categories = DB::select('SELECT * FROM categories');
+        $newsSources = NewsSource::all('id');
+        $this->firstSourceId = $newsSources->first()->id;
+        $this->lastSourceId = $newsSources->last()->id;
         foreach ($categories as $category) {
             $this->categoriesIds[$category->name] = $category->id;
         }
@@ -51,7 +58,7 @@ class NewsSeeder extends Seeder
             'text' => $text,
             'category_id'=> $this->categoriesIds[$categoryName],
             'created_at' => \fake()->date(),
-            'news_source_id' => rand(1, 30)
+            'news_source_id' => rand($this->firstSourceId, $this->lastSourceId)
         ];
     }
 }
