@@ -43,4 +43,19 @@ ul {
 .user-bar {
     list-style-type: none;
 }
+.avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.social-links-box {
+    width: 250px;
+}
+.social-links {
+    justify-content: center !important;
+}
+.social-link {
+    margin: auto 5px;
+}
 

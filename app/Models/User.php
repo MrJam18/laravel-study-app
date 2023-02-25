@@ -22,6 +22,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property DateTime $created_at;
  * @property DateTime $updated_at;
  * @property bool $is_admin;
+ * @property string $avatar_url;
  */
 class User extends Authenticatable
 {
@@ -37,7 +38,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_admin'
+        'is_admin',
+        'avatar_url'
     ];
 
     /**

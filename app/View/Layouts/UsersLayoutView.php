@@ -22,6 +22,7 @@ class UsersLayoutView extends LayoutView
         $menuRoutes = new RouteList();
         $menuRoutes->addRoute(new MenuRoute('main', 'Главная'));
         $menuRoutes->addRoute(new MenuRoute('news', 'Новости'));
+        $menuRoutes->addRoute(new MenuRoute('currencies', 'Курс валют'));
         $menuRoutes->addRoute(new MenuRoute('about/index', 'О нас'));
         $menuRoutes->setCurrentRoute();
         $viewVars = [
