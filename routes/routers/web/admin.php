@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Admin\Categories\CategoriesActionsController;
 use App\Http\Controllers\Admin\Categories\CategoriesController;
+use App\Http\Controllers\Admin\CKEditorController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\News\NewsActionsController;
 use App\Http\Controllers\Admin\News\NewsController;
+use App\Http\Controllers\Admin\NewsSources\NewsSourcesActionsController;
+use App\Http\Controllers\Admin\NewsSources\NewsSourcesController;
 use App\Http\Controllers\Admin\NewsSourcesRequests\NewsSourcesRequestsController;
 use App\Http\Controllers\Admin\NewsSourcesRequests\NewsSourcesRequestsActionsController;
 use App\Http\Controllers\Admin\Reviews\ReviewsActionsController;
@@ -53,5 +56,13 @@ Route::prefix('other')->name('other/')->group(function ()
     Route::get('1', [MainController::class, 'inDev'])->name('1');
     Route::get('2', [MainController::class, 'inDev'])->name('2');
 });
+routeGroup('newsSources', function(){
+    Route::get('list', [NewsSourcesController::class, 'getList'])->name('list');
+    Route::get('create', [NewsSourcesController::class, 'create'])->name('create');
+    Route::get('change/{source}', [NewsSourcesController::class, 'change'])->name('change');
+    \actionGroup(NewsSourcesActionsController::class, 'source');
+});
+
+Route::post('ckeditor/image_upload', [CKEditorController::class, 'upload'])->name('ckeditorUpload');
 
 

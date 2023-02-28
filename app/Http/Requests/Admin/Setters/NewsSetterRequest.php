@@ -17,7 +17,7 @@ class NewsSetterRequest extends GeneralRequest
     {
         return [
             'category_id' => [...$this->getExists('categories'), 'required'],
-            'news_source_id' => [...$this->getExists('news_sources'), 'required'],
+            'link' => ['required', 'url'],
             'title' => ['required', 'between:3,255'],
             'description' => ['required', 'between:10,1000'],
             'text' => ['required', 'min:50']

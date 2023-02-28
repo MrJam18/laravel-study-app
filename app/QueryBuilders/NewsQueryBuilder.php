@@ -29,7 +29,7 @@ class NewsQueryBuilder extends QueryBuilder
     {
         return $this->getOrdered()->
             where('category_id', $categoryId)
-            ->get(['id', $this->getRusDate('created_at') , 'title', 'text']);
+            ->get();
     }
 
     function getList(?OrderBy $orderBy): Collection
@@ -42,8 +42,7 @@ class NewsQueryBuilder extends QueryBuilder
     function getAdminList(): LengthAwarePaginator
     {
         return $this->getOrdered()
-            ->with(['category:id,title', 'newsSource:id,name'])
-            ->select(['news.id', $this->getRusDate('news.created_at'), 'news.title', 'news.news_source_id', 'news.category_id'])
+            ->with(['category:id,title'])
             ->paginate(20);
     }
 
@@ -52,7 +51,7 @@ class NewsQueryBuilder extends QueryBuilder
         $in = $this->query()->distinct()->get(DB::raw('FIRST_VALUE(id) OVER (PARTITION BY category_id ORDER BY news.created_at desc) as id'))->map(fn($news)=> $news->id);
         return $this->getOrdered()->whereIn('news.id', $in)
             ->with('category:id,title')
-            ->get(['news.id', $this->getRusDate('news.created_at'), 'news.title', 'news.description', 'news.category_id']);
+            ->get();
     }
 
 

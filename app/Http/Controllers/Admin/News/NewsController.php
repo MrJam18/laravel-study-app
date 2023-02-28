@@ -36,13 +36,13 @@ class NewsController extends AdminListController
         $viewVars->tableHeaders = [
             'Категория',
             'Заголовок',
-            "Источник",
+            "описание",
             'Дата публикации',
         ];
         $viewVars->properties = [
             ['category', 'title'],
             'title',
-            ['newsSource', 'name'],
+            'description',
             'created_at'
         ];
         $viewVars->header = 'Список Новостей';
@@ -68,11 +68,9 @@ class NewsController extends AdminListController
     {
         $this->view->addCss('admin/news/news-changer');
         $categories = Category::all(['id', 'title']);
-        $newsSources = NewsSource::all(['id', 'name']);
         $this->view->addCss('admin/news/news-setter');
         return [
             'categories' => $categories,
-            'newsSources' => $newsSources
         ];
     }
 }

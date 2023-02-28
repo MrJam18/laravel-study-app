@@ -18,7 +18,7 @@ abstract class QueryBuilder
 
     function getAll(): Collection
     {
-        return $this->query()->get();
+        return $this->query()->with('category')->get();
     }
 
     protected function getRusDate(string $field): Expression

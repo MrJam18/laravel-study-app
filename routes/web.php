@@ -3,9 +3,11 @@
 use App\Exceptions\PageNotFoundException;
 use App\Http\Controllers\AboutActionsController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Admin\CKEditorController;
 use App\Http\Controllers\Auth\SocialiteLoginController;
 use App\Http\Controllers\CurrenciesController;
 use App\Http\Controllers\News\NewsController;
+use App\Http\Controllers\News\NewsParserController;
 use App\Http\Controllers\News\OneNewsController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Middleware\CheckIsAdmin;

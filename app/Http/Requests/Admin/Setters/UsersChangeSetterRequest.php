@@ -7,6 +7,12 @@ use App\Http\Requests\Common\GeneralRequest;
 
 class UsersChangeSetterRequest extends GeneralRequest
 {
+    protected function prepareForValidation(): void
+    {
+        if(!$this->input('is_admin')) {
+            $this->merge(['is_admin' => false]);
+        }
+    }
 
     public function authorize(): bool
     {

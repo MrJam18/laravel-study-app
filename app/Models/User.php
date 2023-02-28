@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Casts\Test;
 use App\Models\Traits\RusTimeStamps;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use DateTime;

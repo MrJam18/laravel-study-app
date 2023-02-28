@@ -33,6 +33,7 @@ class AdminsLayoutView extends LayoutView
         $newsRouteList = new AdminRouteList('Новости');
         $newsRouteList->addRoute(new MenuRoute('admin/news/list', 'Список'));
         $newsRouteList->addRoute(new MenuRoute('admin/categories/list', 'Категории'));
+        $newsRouteList->addRoute(new MenuRoute('admin/newsSources/list', 'Источники'));
         $otherRouteList = new AdminRouteList('Другое');
         $otherRouteList->addRoute(new MenuRoute('admin/reviews/list', 'Отзывы'));
         $otherRouteList->addRoute(new MenuRoute('admin/newsSourcesRequests/list', 'Запросы источников'));

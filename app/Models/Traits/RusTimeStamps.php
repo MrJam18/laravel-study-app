@@ -6,13 +6,16 @@ use DateTime;
 
 trait RusTimeStamps
 {
-    public function getCreatedAtAttribute(string $date): string
+    public function getCreatedAtAttribute(?string $date): ?string
     {
-        return $this->getRusDateTime($date);
+        if($date) return $this->getRusDateTime($date);
+        return null;
+
     }
-    public function getUpdatedAtAttribute(string $date): string
+    public function getUpdatedAtAttribute(?string $date): ?string
     {
-        return $this->getRusDateTime($date);
+        if($date) return $this->getRusDateTime($date);
+        return null;
     }
     private function getRusDateTime(string $date): string
     {

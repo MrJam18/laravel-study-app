@@ -41,4 +41,7 @@
 .admin-setter__checkbox {
     margin-left: 10px;
 }
+.ck-editor__editable {
+    min-height: 280px;
+}
 

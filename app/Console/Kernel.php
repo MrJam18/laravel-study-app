@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Jobs\NewsParsing;
+use App\Models\News\Category;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,6 +17,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $categories = Category::all();
+        foreach ($categories as $category) {
+            $job = new NewsParsing($category);
+            $schedule->job($job)->everyTenMinutes();
+        }
         // $schedule->command('inspire')->hourly();
     }
 

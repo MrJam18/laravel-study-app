@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace App\Models\News;
 
+use App\Models\Casts\RusDateTimeCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,8 +16,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $text
  * @property int $category_id
  * @property Category $category
- * @property int $news_source_id
- * @property NewsSource $news_source
+ * @property string $link
+ * @property int $guid
+ *
  */
 class News extends Model
 {
@@ -28,15 +30,15 @@ class News extends Model
         'text',
         'created_at',
         'category_id',
-        'news_source_id'
+        'link',
+        'guid'
     ];
     public $timestamps = false;
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
-    public function newsSource(): BelongsTo
-    {
-        return $this->belongsTo(NewsSource::class);
-    }
+    protected $casts = [
+        'created_at' => RusDateTimeCast::class
+    ];
 }

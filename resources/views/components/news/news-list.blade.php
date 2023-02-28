@@ -11,7 +11,7 @@
                         <h3 class="mb-0 news-list__header">{{$item->title}}</h3>
                         <p class="card-text mb-auto">{{$item->description}}</p>
                         <div class="mb-1 text-muted">{{$item->created_at}} г.</div>
-                        <a href="{{\route('news') . '/' . $item->id}}" class="stretched-link">Читать</a>
+                        <a href="{{$item->link}}" class="stretched-link">Читать</a>
                     </div>
                 </div>
             </div>

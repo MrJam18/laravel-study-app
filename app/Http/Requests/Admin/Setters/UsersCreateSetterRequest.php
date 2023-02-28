@@ -14,6 +14,13 @@ class UsersCreateSetterRequest extends GeneralRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        if(!$this->input('is_admin')) {
+            $this->replace(['is_admin' => false]);
+        }
+    }
+
     public function rules(): array
     {
         return [
